@@ -1,5 +1,6 @@
 package com.goodbird.npcgecko.utils;
 
+import com.goodbird.npcgecko.data.CustomModelData;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -24,9 +25,12 @@ import java.security.MessageDigest;
 import java.util.Map;
 
 public class NpcTextureUtils {
+    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(CustomModelData.DEFAULT_TEXTURE);
+
     public static ResourceLocation getNpcTexture(EntityNPCInterface npc){
         if (npc.textureLocation == null) {
             if (npc.display.skinType == 0) {
+                if (npc.display.texture == null || npc.display.texture.isEmpty()) return DEFAULT_TEXTURE;
                 if (npc instanceof EntityCustomNpc && ((EntityCustomNpc) npc).modelData.entityClass == null) {
                     if (!(npc.display.texture).isEmpty()) {
                         try {
@@ -67,7 +71,7 @@ public class NpcTextureUtils {
                 return AbstractClientPlayer.locationStevePng;
             }
         }
-        return npc.textureLocation;
+        return npc.textureLocation == null ? DEFAULT_TEXTURE : npc.textureLocation;
     }
 
     private static ResourceLocation adjustLocalTexture(EntityNPCInterface npc, ResourceLocation location) throws IOException {

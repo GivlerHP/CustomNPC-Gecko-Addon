@@ -3,8 +3,11 @@ package com.goodbird.npcgecko.data;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class CustomModelData {
-    private String model = "geckolib3:geo/npc.geo.json";
-    private String animFile = "npcgecko:animations/geo_npc.animation.json";
+    public static final String DEFAULT_MODEL = "geckolib3:geo/npc.geo.json";
+    public static final String DEFAULT_TEXTURE = "geckolib3:textures/model/entity/geo_npc.png";
+    public static final String DEFAULT_ANIMATION = "npcgecko:animations/geo_npc.animation.json";
+    private String model = DEFAULT_MODEL;
+    private String animFile = DEFAULT_ANIMATION;
     private String idleAnim = "";
     private String walkAnim = "";
     private String meleeAttackAnim = "";

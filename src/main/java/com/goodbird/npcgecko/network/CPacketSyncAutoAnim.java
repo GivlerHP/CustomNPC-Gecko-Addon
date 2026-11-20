@@ -1,14 +1,10 @@
 package com.goodbird.npcgecko.network;
 
 import com.goodbird.npcgecko.constants.EnumSyncAutoAnim;
-import com.goodbird.npcgecko.entity.EntityCustomModel;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 
 public final class CPacketSyncAutoAnim implements IMessage, IMessageHandler<CPacketSyncAutoAnim, IMessage> {
@@ -36,12 +32,7 @@ public final class CPacketSyncAutoAnim implements IMessage, IMessageHandler<CPac
 
     @Override
     public IMessage onMessage(CPacketSyncAutoAnim message, MessageContext ctx) {
-        Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityId);
-        if(!(entity instanceof EntityCustomNpc)) return null;
-        EntityCustomNpc npc = (EntityCustomNpc) entity;
-        if(npc.modelData==null || !(npc.modelData.getEntity(npc) instanceof EntityCustomModel)) return null;
-        EntityCustomModel entityCustomModel = (EntityCustomModel) npc.modelData.getEntity(npc);
-        entityCustomModel.activateReceivedAnim(message.animType);
+        ClientNpcAnimation.forModel(message.entityId, model -> model.activateReceivedAnim(message.animType));
         return null;
     }
 }

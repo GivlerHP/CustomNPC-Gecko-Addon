@@ -1,17 +1,12 @@
 package com.goodbird.npcgecko.network;
 
-import com.goodbird.npcgecko.entity.EntityCustomModel;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import kamkeel.npcs.util.ByteBufUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.Server;
-import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -77,12 +72,7 @@ public final class CPacketSyncManualAnim implements IMessage, IMessageHandler<CP
 
     @Override
     public IMessage onMessage(CPacketSyncManualAnim message, MessageContext ctx) {
-        Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityId);
-        if(!(entity instanceof EntityCustomNpc)) return null;
-        EntityCustomNpc npc = (EntityCustomNpc) entity;
-        if(npc.modelData==null || !(npc.modelData.getEntity(npc) instanceof EntityCustomModel)) return null;
-        EntityCustomModel entityCustomModel = (EntityCustomModel) npc.modelData.getEntity(npc);
-        entityCustomModel.manualAnim = message.builder;
+        ClientNpcAnimation.forModel(message.entityId, model -> model.setManualAnimation(message.builder));
         return null;
     }
 }

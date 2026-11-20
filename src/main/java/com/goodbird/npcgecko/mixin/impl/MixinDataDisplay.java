@@ -40,7 +40,8 @@ public class MixinDataDisplay implements IDataDisplay {
 
     @Unique
     public boolean hasCustomModel() {
-        return (npc instanceof EntityCustomNpc) && ((EntityCustomNpc) npc).modelData.getEntity(npc) != null &&
-            ((EntityCustomNpc) npc).modelData.getEntity(npc) instanceof EntityCustomModel;
+        if (!(npc instanceof EntityCustomNpc)) return false;
+        Class<?> type = ((EntityCustomNpc) npc).modelData.getEntityClass();
+        return type != null && EntityCustomModel.class.isAssignableFrom(type);
     }
 }
