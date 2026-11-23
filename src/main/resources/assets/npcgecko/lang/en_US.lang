@@ -17,3 +17,4 @@ gecko.previewLoop=Loop
 gecko.previewOnce=Play once
 gecko.headBone=Head bone
 gecko.transition=Transition (ticks)
+npcgecko.mod.description=Integrates GeckoLib 3 with CustomNPC+.

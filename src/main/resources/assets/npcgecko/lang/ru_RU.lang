@@ -17,3 +17,4 @@ gecko.previewLoop=По кругу
 gecko.previewOnce=Один раз
 gecko.headBone=Кость головы
 gecko.transition=Переход (тики)
+npcgecko.mod.description=Связывает GeckoLib 3 с CustomNPC+.

@@ -26,6 +26,7 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
         GeckoDialogueAnimations.register();
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new LocalizedModMetadata());
     }
 
     public World getWorldById(int id){
