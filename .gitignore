@@ -9,8 +9,10 @@
 .project
 /bin/
 /config/
+/prod
 /crash-reports/
 /logs/
+/.tmp-geckolib-history
 options.txt
 /saves/
 usernamecache.json
